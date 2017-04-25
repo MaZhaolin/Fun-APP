@@ -12,7 +12,7 @@
       {{ comment.content }}
     </div>
     <div class="like">
-      <i class="icon"></i>
+      <i class="iconfont">&#xe794;</i>
       <span class="count">166</span>
     </div>
   </div>
@@ -47,6 +47,10 @@ export default {
       font-size: .8em
   .like
     float: right
-    font-size: .8em
-    color: #8a8781
+    color: #c5c5c5
+    .iconfont
+      font-size: 1em
+      vertical-align: middle
+    .count
+      font-size: .6em
 </style>

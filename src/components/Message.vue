@@ -1,27 +1,22 @@
 <template>
-  <div class="home">
-    <mt-header fixed title="首 页"></mt-header>
-    <FunsList></FunsList>
-  </div>
+<div class="message">
+  <mt-header fixed title="消 息"></mt-header>
+</div>
 </template>
 
 <script>
-import FunsList from './FunsList'
-
 export default {
-  name: 'Home',
+  name: 'Message',
   data () {
     return {
+
     }
-  },
-  components: {
-    FunsList
   }
 }
 </script>
 
 <style lang="sass" scoped>
-.home
+.message
   .mint-header
     background-color: #dcd9cf
     font-size: 16px

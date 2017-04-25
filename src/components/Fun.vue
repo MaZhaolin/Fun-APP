@@ -21,11 +21,11 @@
     </div>
     <div class="fun-control">
       <div class="item">
-        <i class="icon like-icon"></i>
+        <i class="iconfont">&#xe794;</i>
         <span class="count">3.1万</span>
       </div>
       <div class="item">
-        <i class="icon"></i>
+        <i class="iconfont">&#xe763;</i>
         <span class="count">666</span>
       </div>
     </div>
@@ -49,7 +49,7 @@ export default {
 
 <style lang="sass" scoped>
 .fun
-  padding: 1em
+  padding: .5em .5em 0 .5em
   background: #fff
   .fun-user
     .user-avatar
@@ -64,12 +64,18 @@ export default {
       display: inline-block
       font-size: 0.8em
   .fun-god-comment
-    background: #eee
-    margin: 0 -1em
+    background: #f3f3f3
   .fun-control
+    padding: .5em
     .item
       display: inline-block
-      font-size: 0.8em
-      color: #8a8781
+      color: #c5c5c5
+      margin-right: 1em
+      .fa
+        vertical-align: middle
+        font-size: 1.3em
+        padding-right: .2em
+      .count
+        font-size: .7em
   .fun-content
 </style>

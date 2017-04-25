@@ -16,9 +16,20 @@ export default {
 </script>
 
 <style lang="sass">
+@font-face
+  font-family: 'iconfont'  /* project id 286774 */
+  src: url('./assets/fonts/iconfont.eot');
+  src: url('./assets/fonts/iconfont.eot?#iefix') format('embedded-opentype'),
+  url('./assets/fonts/iconfont.woff') format('woff'),
+  url('./assets/fonts/iconfont.ttf') format('truetype'),
+  url('./assets/fonts/iconfont.svg#iconfont') format('svg')
+.iconfont
+  font-family: iconfont
+  font-style: normal
 body
   margin: 0
   background: #eee;
+
 #app
-  margin-top: 40px;
+  margin: 40px 0;
 </style>
