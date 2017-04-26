@@ -1,19 +1,20 @@
 <template>
   <div class="funs-list">
     <mt-loadmore :top-method="loadTop" ref="loadmore">
-      <Fun v-for="(fun, i) in funs" :fun="fun" :key='i'></Fun>
+      <FunItem v-for="(fun, i) in funs" :fun="fun" :key='i'></FunItem>
     </mt-loadmore>
   </div>
 </template>
 
 <script>
-import Fun from './Fun.vue'
+import FunItem from './FunItem.vue'
 
 export default {
   name: 'FunsList',
   data () {
     return {
       funs: [{
+        id: 1,
         isLiked: false,
         hasGodComment: true,
         godComment: {
@@ -26,6 +27,7 @@ export default {
         }
       },
       {
+        id: 2,
         isLiked: false,
         hasGodComment: true,
         godComment: {
@@ -38,6 +40,7 @@ export default {
         }
       },
       {
+        id: 3,
         isLiked: false,
         hasGodComment: true,
         godComment: {
@@ -50,6 +53,7 @@ export default {
         }
       },
       {
+        id: 4,
         isLiked: false,
         hasGodComment: true,
         godComment: {
@@ -83,13 +87,13 @@ export default {
     }
   },
   components: {
-    Fun
+    FunItem
   }
 }
 </script>
 
 <style lang="sass" scoped>
 .funs-list
-  .fun
+  .fun-item
     margin-bottom: .5em
 </style>
