@@ -11,8 +11,7 @@
 </template>
 
 <script>
-import { Toast } from 'mint-ui'
-import storage from 'localforage'
+import { Toast, Indicator } from 'mint-ui'
 export default {
   props: ['status'],
   data () {
@@ -28,12 +27,15 @@ export default {
       this.$emit('closeLoginForm')
     },
     loginHandle () {
+      Indicator.open()
       this.axios.post('http://60.205.203.185:8081/user/login', 'username=' + this.form.username + '&password=' + this.form.password)
       .then(data => {
+        Indicator.close()
         data = data.data
         if (data.status === 200) {
+          this.$ls.set('token', data.data)
+          this.$emit('loadLogin')
           this.$emit('closeLoginForm')
-          storage.setItem('token', data.data)
         }
         Toast({
           message: data.msg,
@@ -42,6 +44,7 @@ export default {
         })
       })
       .catch(() => {
+        Indicator.close()
         Toast({
           message: '网络连接错误',
           position: 'bottom',

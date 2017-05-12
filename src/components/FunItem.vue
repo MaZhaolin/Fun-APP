@@ -44,6 +44,7 @@ export default {
   methods: {
     toFunHandle () {
       console.log(this.fun.id)
+      this.$router.push({name: 'Fun', params: {id: this.fun.id}})
     },
     likeHandle () {
 

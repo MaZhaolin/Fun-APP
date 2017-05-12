@@ -5,9 +5,15 @@ import App from './App'
 import MintUI from 'mint-ui'
 import router from './router'
 import axios from 'axios'
+import VueLocalStorage from 'vue-ls'
 import VueAxios from 'vue-axios'
 import 'mint-ui/lib/style.css'
 
+const options = {
+  namespace: 'funapp_'
+}
+
+Vue.use(VueLocalStorage, options)
 Vue.use(MintUI)
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false

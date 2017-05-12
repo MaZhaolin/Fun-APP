@@ -3,22 +3,26 @@
     <router-view
       @showLoginForm='showLoginForm'
       @showRegisterForm='showRegisterForm'
+      @logout='logout'
       :isLogin="isLogin"
     ></router-view>
     <Tabbar></Tabbar>
     <LoginForm
     :status="loginFormStatus"
     @closeLoginForm="closeLoginForm"
+    @loadLogin="loadLogin"
     ></LoginForm>
     <RegisterForm
     :status="registerFormStatus"
     @closeRegisterForm="closeRegisterForm"
+    @showLoginForm="showLoginForm"
+    @loadLogin="loadLogin"
     ></RegisterForm>
   </div>
 </template>
 
 <script>
-import storage from 'localforage'
+import { Toast, Indicator } from 'mint-ui'
 import Tabbar from '@/components/Tabbar'
 import LoginForm from '@/components/auth/login'
 import RegisterForm from '@/components/auth/register'
@@ -28,15 +32,13 @@ export default {
     return {
       loginFormStatus: false,
       registerFormStatus: false,
-      isLogin: false,
-      token: false,
+      isLogin: true,
+      token: null,
       user: {}
     }
   },
   created () {
-    this.token = storage.setItem('token', '1')
-    this.token = storage.getItem('token')
-    console.log(this.token.PromiseValue)
+    this.loadLogin()
   },
   methods: {
     showLoginForm () {
@@ -50,6 +52,37 @@ export default {
     },
     closeRegisterForm () {
       this.registerFormStatus = false
+    },
+    loadLogin () {
+      this.token = this.$ls.get('token')
+      if (this.token === null) {
+        this.isLogin = false
+      } else {
+        Indicator.open()
+        this.axios.get('http://60.205.203.185:8081/user/token/' + this.token)
+        .then(data => {
+          Indicator.close()
+          data = data.data
+          if (data.status === 200) {
+            this.isLogin = true
+            this.user = data.data
+          } else {
+            this.isLogin = false
+            this.user = {}
+          }
+        })
+        .catch(data => {
+          Toast({
+            message: '网络连接失败',
+            position: 'bottom',
+            duration: 5000
+          })
+        })
+      }
+    },
+    logout () {
+      this.$ls.remove('token')
+      this.loadLogin()
     }
   },
   components: {
@@ -77,12 +110,16 @@ body
 
 #app
   margin: 40px 0;
-.mint-button.btn-success
-    background: #20e281
+  .mint-button.btn-success
+      background: #20e281
+      color: #fff
+  .mint-button.btn-warning
+    background: #fbc13c
     color: #fff
-.mint-button.btn-warning
-  background: #fbc13c
-  color: #fff
-.mint-toast
-  z-index: 100000
+  .mint-toast, .mint-indicator-wrapper
+    z-index: 100000!important
+  .mint-header
+      background-color: #dcd9cf
+      font-size: 16px
+      color: #6b5547
 </style>

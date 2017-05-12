@@ -10,6 +10,6 @@ export default new Router({
   routes: [
     { path: '/', name: 'Home', component: Home },
     { path: '/message', name: 'Message', component: Message },
-    { path: '/fun', name: 'Fun', component: Fun }
+    { path: '/fun/:id', name: 'Fun', component: Fun }
   ]
 })
