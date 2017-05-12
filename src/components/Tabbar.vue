@@ -5,7 +5,7 @@
     <span>首页</span>
   </mt-tab-item>
   <mt-tab-item id="Message">
-    <i class="iconfont">{{ selected === 'message' ? '&#xe762;' : '&#xe763;' }}</i>
+    <i class="iconfont">{{ selected === 'Message' ? '&#xe762;' : '&#xe763;' }}</i>
     <span>消息</span>
   </mt-tab-item>
 </mt-tabbar>
