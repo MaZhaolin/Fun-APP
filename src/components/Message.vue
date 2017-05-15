@@ -6,7 +6,8 @@
     <mt-button class="btn-warning" @click="showRegisterFormHandle">注册</mt-button>
   </div>
   <div class="content" v-if="isLogin">
-    <mt-cell title="投稿互动"></mt-cell>
+    <mt-cell @click="redirect(1)" title="投稿互动"></mt-cell>
+    <mt-cell @click="redirect(1)" title="我的投稿"></mt-cell>
     <mt-button type="danger" @click="logoutHandle">退出登录</mt-button>
   </div>
 </div>
@@ -43,4 +44,7 @@ export default {
     width: 100%
   .content
     padding: 1em
+  .mint-cell
+    margin-bottom: .25rem;
+    border-radius: .25rem;
 </style>

@@ -1,6 +1,6 @@
 <template>
 <mt-tabbar :fixed="true" v-model="selected" class="tabbar">
-  <mt-tab-item id="Home" @click="homeClickHandle">
+  <mt-tab-item id="Home">
     <i class="iconfont">{{ selected === 'Home' ? '&#xe750;' : '&#xe751;' }}</i>
     <span>首页</span>
   </mt-tab-item>
@@ -21,13 +21,11 @@ export default {
       selected: 'Home'
     }
   },
-  methods: {
-    homeClickHandle (e) {
-      alert(1)
-    }
+  created () {
+    this.selected = this.$route.name
   },
   watch: {
-    selected: function (val) {
+    selected (val) {
       this.$router.push({ name: val })
     }
   }

@@ -1,11 +1,14 @@
 <template>
   <div id="app">
+  <transition :name="transitionName">
     <router-view
-      @showLoginForm='showLoginForm'
-      @showRegisterForm='showRegisterForm'
-      @logout='logout'
-      :isLogin="isLogin"
-    ></router-view>
+        @showLoginForm='showLoginForm'
+        @showRegisterForm='showRegisterForm'
+        @logout='logout'
+        :isLogin="isLogin"
+      ></router-view>
+  </transition>
+
     <Tabbar></Tabbar>
     <LoginForm
     :status="loginFormStatus"
@@ -34,6 +37,7 @@ export default {
       registerFormStatus: false,
       isLogin: true,
       token: null,
+      transitionName: 'slide-left',
       user: {}
     }
   },
@@ -85,6 +89,13 @@ export default {
       this.loadLogin()
     }
   },
+  watch: {
+    $route (to, from) {
+      const toDepth = to.path.split('/').length
+      const fromDepth = from.path.split('/').length
+      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+    }
+  },
   components: {
     Tabbar,
     LoginForm,
@@ -111,15 +122,15 @@ body
 #app
   margin: 40px 0;
   .mint-button.btn-success
-      background: #20e281
-      color: #fff
+    background: #20e281
+    color: #fff
   .mint-button.btn-warning
     background: #fbc13c
     color: #fff
-  .mint-toast, .mint-indicator-wrapper
-    z-index: 100000!important
   .mint-header
-      background-color: #dcd9cf
-      font-size: 16px
-      color: #6b5547
+    background-color: #dcd9cf
+    font-size: 16px
+    color: #6b5547
+.mint-toast, .mint-indicator-wrapper
+  z-index: 100000!important
 </style>
