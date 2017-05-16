@@ -44,9 +44,8 @@ export default {
       let params = 'username=' + form.username + '&tel=' + form.tel + '&password=' + form.password
       Indicator.open()
       this.axios.post('http://60.205.203.185:8081/user/register/', params)
-      .then(data => {
+      .then(({data}) => {
         Indicator.close()
-        data = data.data
         if (data.status === 200) {
           this.$emit('closeRegisterForm')
           this.$emit('showLoginForm')

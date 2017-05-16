@@ -8,82 +8,42 @@
 
 <script>
 import FunItem from './FunItem.vue'
+import { Toast, Indicator } from 'mint-ui'
 
 export default {
   name: 'FunsList',
   data () {
     return {
-      funs: [{
-        id: 1,
-        isLiked: false,
-        hasGodComment: true,
-        godComment: {
-          user: {
-            avatar: '../assets/logo.png',
-            username: 'chengwei'
-          },
-          content: '神评论啊',
-          like: 666
-        }
-      },
-      {
-        id: 2,
-        isLiked: false,
-        hasGodComment: true,
-        godComment: {
-          user: {
-            avatar: '../assets/logo.png',
-            username: 'chengwei'
-          },
-          content: '神评论啊',
-          like: 666
-        }
-      },
-      {
-        id: 3,
-        isLiked: false,
-        hasGodComment: true,
-        godComment: {
-          user: {
-            avatar: '../assets/logo.png',
-            username: 'chengwei'
-          },
-          content: '神评论啊',
-          like: 666
-        }
-      },
-      {
-        id: 4,
-        isLiked: false,
-        hasGodComment: true,
-        godComment: {
-          user: {
-            avatar: '../assets/logo.png',
-            username: 'chengwei'
-          },
-          content: '神评论啊',
-          like: 666
-        }
-      },
-      {
-        isLiked: false,
-        hasGodComment: true,
-        godComment: {
-          user: {
-            avatar: '../assets/logo.png',
-            username: 'chengwei'
-          },
-          content: '神评论啊',
-          like: 666
-        }
-      }]
+      funs: []
     }
+  },
+  created () {
+    this.loadData()
   },
   methods: {
     loadTop () {
       setTimeout(() => {
         this.$refs.loadmore.onTopLoaded()
       }, 1000)
+    },
+    loadData () {
+      this.funs = this.$ls.get('funs')
+      if (this.funs === null) {
+        Indicator.open()
+        this.axios.get('http://60.205.203.185:8082/rest/topic/list/1/2')
+        .then(({data}) => {
+          Indicator.close()
+          if (data.status === 200) {
+            this.funs = data.data.rows
+            this.$ls.set('funs', this.funs)
+          }
+          Toast({
+            message: data.msg,
+            position: 'bottom',
+            duration: 2000
+          })
+        })
+      }
     }
   },
   components: {

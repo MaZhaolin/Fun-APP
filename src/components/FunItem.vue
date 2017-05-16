@@ -5,28 +5,23 @@
         <img src="../assets/logo.png">
       </div>
       <div class="user-name">
-        inster
+        {{ fun.username}}
       </div>
     </div>
     <div class="fun-content">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      {{ fun.content }}
     </div>
-    <div class="fun-god-comment" v-show="fun.hasGodComment">
+    <div class="fun-god-comment" v-if="fun.hasGodComment">
       <comment :comment="fun.godComment"></comment>
     </div>
     <div class="fun-control">
       <div class="item">
-        <i class="iconfont" @click="likeHandle" >&#xe794;</i>
-        <span class="count">3.1万</span>
+        <i class="iconfont" @click.parent="likeHandle" >&#xe794;</i>
+        <span class="count">{{ fun.likecount }}</span>
       </div>
       <div class="item">
         <i class="iconfont">&#xe763;</i>
-        <span class="count">666</span>
+        <span class="count">{{ fun.replycount }}</span>
       </div>
     </div>
   </div>

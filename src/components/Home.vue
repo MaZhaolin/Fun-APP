@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <mt-header fixed title="首 页">
-      <mt-button slot="right" class="iconfont" @click="togglePublishFun">&#xe61a;</mt-button>
+      <mt-button v-show="isLogin" slot="right" class="iconfont" @click="togglePublishFun">&#xe61a;</mt-button>
     </mt-header>
     <FunsList></FunsList>
     <PublishFun
@@ -16,6 +16,7 @@ import PublishFun from './PublishFun'
 
 export default {
   name: 'Home',
+  props: ['isLogin'],
   data () {
     return {
       publishFunStatus: false

@@ -29,9 +29,8 @@ export default {
     loginHandle () {
       Indicator.open()
       this.axios.post('http://60.205.203.185:8081/user/login', 'username=' + this.form.username + '&password=' + this.form.password)
-      .then(data => {
+      .then(({data}) => {
         Indicator.close()
-        data = data.data
         if (data.status === 200) {
           this.$ls.set('token', data.data)
           this.$emit('loadLogin')

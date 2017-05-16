@@ -6,8 +6,8 @@
     <mt-button class="btn-warning" @click="showRegisterFormHandle">注册</mt-button>
   </div>
   <div class="content" v-if="isLogin">
-    <mt-cell @click="redirect(1)" title="投稿互动"></mt-cell>
-    <mt-cell @click="redirect(1)" title="我的投稿"></mt-cell>
+    <mt-cell @click.native="redirectHandle()" title="投稿互动"></mt-cell>
+    <mt-cell @click.native="redirectHandle('/user/funs')" title="我的投稿"></mt-cell>
     <mt-button type="danger" @click="logoutHandle">退出登录</mt-button>
   </div>
 </div>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'Message',
+  name: 'User',
   props: ['isLogin'],
   data () {
     return {
@@ -30,6 +30,9 @@ export default {
     },
     logoutHandle () {
       this.$emit('logout')
+    },
+    redirectHandle (path) {
+      this.$router.push({path})
     }
   }
 }
