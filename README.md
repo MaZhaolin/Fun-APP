@@ -2,6 +2,11 @@
 
 > fun App 
 
+## description
+this is a fun app base vue, you can build Android App or ios App by Hbuilder。
+
+[click download android App ]()
+
 ## Build Setup
 
 ``` bash
